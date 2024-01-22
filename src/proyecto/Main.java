@@ -7,7 +7,9 @@ public class Main {
 		
 		Motor miJuego = new Motor();
 		
-	miJuego.play();
+		miJuego.play();
+		
+
 	
 	
 		
