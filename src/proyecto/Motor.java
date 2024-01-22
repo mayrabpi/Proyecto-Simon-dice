@@ -11,7 +11,7 @@ public class Motor {
 	
 	public enum tColores{ROJO,VERDE,AZUL,DORADO;}
     private Scanner entrada=new Scanner(System.in);
-    final private  int max_colores_seq=12;
+    private  int max_colores_seq=12;
     private tColores [] secuenciaColores = new tColores[max_colores_seq];
     private String nombre;
     
@@ -23,8 +23,8 @@ public class Motor {
     public Motor(){
     	
     	this.nombre = entrada.nextLine();
-    	tColores [] secuenciaColores = new tColores[max_colores_seq];
-        //Random rand = new Random();
+    //Colores [] secuenciaColores = new tColores[max_colores_seq];
+        
     	
     	
     	
@@ -93,10 +93,10 @@ public class Motor {
     	 */
     }
     public void generarSecuencia (int _numColores) {
-    	
+    	Random rand = new Random();
     	for (int i= 0; i< this.secuenciaColores.length ; i++) {
     		
-    		int numAleatorio = (int)Math.random()* _numColores;    
+    		int numAleatorio = rand.nextInt(0,4);
     		this.secuenciaColores[i] = intTocolor(numAleatorio);
     
   
@@ -126,20 +126,14 @@ public class Motor {
     	
     	public void mostrarSecuencia(int _numero) {
     		
-    		
-    		System.out.println("memoriza la secuencia de colores:");
-    		
-    		for (int i= 0; i< this.secuenciaColores.length ; i++) {
+    		for (int i= 0; i< _numero ; i++) {
     			
-    			System.out.println(this.secuenciaColores [_numero]);
+    			System.out.print(this.secuenciaColores[i]+ " ");
     			
     			
     	
     		}
-    		 
-    		for (int i = 0; i < 50; ++i) {
-				System.out.println();
-			}
+    		
     	
     	
     	}
@@ -148,40 +142,63 @@ public class Motor {
     	 * 
     	 */
     	
-    	public void play() {
-    		int secuenciaActual =3;
-    		
-    		boolean fallo = comprobarFallo(secuenciaActual, null);
-    		
-    		System.out.println("Bienvenido a Simon dice ");
-    		System.out.println("Cual es tu nombre ");
-    		this.nombre=entrada.nextLine();
-    		 
-    	}
     	
     	
       public void menu() {
-	   int opcion = entrada.nextInt();
-	   do {
-		   System.out.println("Bienvenido al juego  ");
-		   System.out.println("1: Jugar ");
-		   System.out.println("2: Salir? ");
-		   System.out.println("Seleccione una opción: ");
-		   
-		   switch (opcion) {
-		   case 1:
-			   System.out.println("empieza ");
-			   break;
-		   case 2:
-			   System.out.println("¡Adios!  ");
-			   break;
-		   default:
-			   System.out.println("Opción no valida  ");
-		   
-		   } 
-   }while (opcion!=2 && opcion !=1);
 	   
+    	  System.out.println("¿Qué deseas hacer? \n 1 Jugar \n 2 Salir ");
+	  
    }
+     
+      public void play() {
+    	  menu();
+    	  
+    	  int opcion= entrada.nextInt();
+    	  this.nombre=entrada.nextLine();
+    	 if ( opcion == 1) {
+    		 
+    		 System.out.println("Bienvenido a Simon Dice ");
+    		 System.out.println("Cual es tu nombre ");
+    		 this.nombre=entrada.nextLine();
+    		 System.out.println("Hola "+ this.nombre + " pulsa ENTER para empezar a jugar");
+    		 
+    		 generarSecuencia(12);
+    		 
+    		 
+    	 }
+    	 
+    	 for (int i =0; i<max_colores_seq - 2;i++ ) {
+    		 System.out.println("ENTER para continuar");
+    		 
+    		 for (int j=0; j<50; j++) {
+    			 System.out.println();
+    		 }
+    		 
+    		 mostrarSecuencia(3 + i);
+        	 System.out.println();
+        	 
+        	 System.out.println("memorize la secuencia");
+        
+        	 System.out.println("ESCRIBA en el orden correcto la primera letra de los colores MEMORIZADOS ");
+        	 
+        	 
+        		  
+        		
+        		  
+        	  
+        	  
+        	  
+        	  
+        	  
+    	 
+    	
+    	 
+    	 }
+    	 
+    	 
+    	 }
+	   
+   
     
   
 	
