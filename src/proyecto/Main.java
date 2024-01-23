@@ -7,7 +7,7 @@ public class Main {
 		
 		Motor miJuego = new Motor();
 		
-		miJuego.play();
+		miJuego.start();
 		
 
 	
@@ -16,6 +16,7 @@ public class Main {
 
        
 	}
+	
 	
 	
 
