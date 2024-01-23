@@ -110,9 +110,9 @@ public class Motor {
     	
     	public boolean comprobarFallo(int _index, tColores _color) {
     	
-    		boolean comprobar = true;
+    		boolean comprobar = false;
     		if ( _color != this.secuenciaColores[_index]) {
-    			comprobar= false;
+    			comprobar= true;
     		}
     		return comprobar;
     	
@@ -128,14 +128,9 @@ public class Motor {
     		
     		for (int i= 0; i< _numero ; i++) {
     			
-    			System.out.print(this.secuenciaColores[i]+ " ");
-    			
-    			
+    			System.out.print(this.secuenciaColores[i]+ " ");		
     	
     		}
-    		
-    	
-    	
     	}
     	
     	/**
@@ -143,46 +138,100 @@ public class Motor {
     	 */
     	
     	
-    	
       public void menu() {
 	   
-    	  System.out.println("¿Qué deseas hacer? \n 1 Jugar \n 2 Salir ");
+    	  System.out.println("¿Qué deseas hacer? \n 0 salir \n 1 jugar ");
 	  
    }
+      
+      public void start () {
+    	 
+    	  
+    	 System.out.println("Bienvenido a Simon Dice ");
+ 		 System.out.println("Cual es tu nombre ");
+ 		 
+ 		 
+ 		 this.nombre=entrada.nextLine();
+ 		  Jugador jugador = new Jugador(" ");
+ 		  jugador.setNombre(nombre);
+ 		 
+ 		 System.out.println("Hola "+  jugador.getNombre() + " pulsa ENTER para empezar ");
+ 		 entrada.nextLine();
+ 		 menu();
+ 		 int opcion= entrada.nextInt();
+ 		 do {
+ 			 switch(opcion){
+ 			 
+ 			 case 0:
+ 				 System.out.println("Abandonas el juego");
+ 				 break;
+ 				 
+ 			 case 1:
+ 				 play();
+ 				 break;
+ 			  
+ 			 }
+ 		 }while (opcion !=0);
+ 				  
+      }
      
       public void play() {
-    	  menu();
     	  
-    	  int opcion= entrada.nextInt();
-    	  this.nombre=entrada.nextLine();
-    	 if ( opcion == 1) {
-    		 
-    		 System.out.println("Bienvenido a Simon Dice ");
-    		 System.out.println("Cual es tu nombre ");
-    		 this.nombre=entrada.nextLine();
-    		 System.out.println("Hola "+ this.nombre + " pulsa ENTER para empezar a jugar");
-    		 
-    		 generarSecuencia(12);
-    		 
-    		 
-    	 }
+    	     int secuencia=3;
+    	     int puntuacion;
+    	     boolean fallo = false;
     	 
-    	 for (int i =0; i<max_colores_seq - 2;i++ ) {
-    		 System.out.println("ENTER para continuar");
+    		 generarSecuencia(12);
+    		 	 
+    	     for (int i =0; i<max_colores_seq - 2;i++ ) {
     		 
-    		 for (int j=0; j<50; j++) {
-    			 System.out.println();
-    		 }
+    		 entrada.nextLine();
+    	
+    		 System.out.println("memorize la secuencia");
     		 
-    		 mostrarSecuencia(3 + i);
+    		 mostrarSecuencia(secuencia + i);
         	 System.out.println();
         	 
-        	 System.out.println("memorize la secuencia");
-        
+        	 entrada.nextLine();
+        	 
+        	  for (int j=0; j<50; j++) {
+			 System.out.println();
+		 	}
+        	 
+        	 entrada.nextLine();
+        	 
         	 System.out.println("ESCRIBA en el orden correcto la primera letra de los colores MEMORIZADOS ");
         	 
+        	 System.out.println();
         	 
-        		  
+        	
+        	 char miChar =entrada.nextLine().charAt(0);
+        	
+        	 
+        	 while (  fallo == comprobarFallo( i , charToColor(miChar))) {
+        		 
+        		 
+        		 System.out.println("correcto");
+        		 
+        	  
+        	 } 
+        	 
+        	
+     
+        	 
+        	 
+        	
+        		 
+        		 		 
+        		 
+        	 
+      
+        		 
+        		
+        		 
+        	 
+        	 
+        	 
         		
         		  
         	  
