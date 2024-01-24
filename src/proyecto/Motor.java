@@ -37,10 +37,10 @@ public class Motor {
      */
   public tColores charToColor (char _color) {
 	  
-	  char _color1 = Character.toLowerCase(_color);
+	  
 	  tColores charColor=null ;
 	  
-	  switch (_color1) {
+	  switch (_color) {
 	  case 'R':
 		  charColor= tColores.ROJO;
 		  break;
@@ -54,7 +54,7 @@ public class Motor {
 		  charColor= tColores.DORADO;
 		  break;
       default :
-    	  System.out.println("No es correcto");
+    	  System.out.println(" no es correcto");
 	  	  
 	  }
 		return charColor;
@@ -86,6 +86,8 @@ public class Motor {
     		
     	}
     	return posicion;
+    	
+    
     	
     	/**
     	 *Método generarSecuencia, Este método genera una secuencia de colores de forma aleatoria , la que se almacenará en el array
@@ -134,7 +136,7 @@ public class Motor {
     	}
     	
     	/**
-    	 * 
+    	 * Este metodo muestra el menu para que el jugador elija que hacer, si jugar o salir
     	 */
     	
     	
@@ -143,6 +145,30 @@ public class Motor {
     	  System.out.println("¿Qué deseas hacer? \n 0 salir \n 1 jugar ");
 	  
    }
+      
+      public String mostrarColor(tColores _color) {
+    	  String color = null;
+    	  switch (_color) {
+    	  case ROJO:
+    		  color="Rojo";
+    		  break;
+    	  case VERDE:
+    		  color ="Verde";
+    		  break;
+    	  case AZUL:
+    		  color = "Azul";
+    		  break;
+    	  case DORADO:
+    		  color = "Dorado";
+    		  break;
+    		  
+    		  
+    	  }
+    	  return  color;
+      }
+      /**
+       * Este metodo que lleva el control del juego 
+       */
       
       public void start () {
     	 
@@ -176,20 +202,23 @@ public class Motor {
       }
      
       public void play() {
+    	  generarSecuencia(12);
     	  
     	     int secuencia=3;
     	     int puntuacion;
     	     boolean fallo = false;
+    	     
     	 
-    		 generarSecuencia(12);
+    		 
     		 	 
-    	     for (int i =0; i<max_colores_seq - 2;i++ ) {
+    	      for (int i =0; i<max_colores_seq - 2;i++ ) {
     		 
     		 entrada.nextLine();
-    	
-    		 System.out.println("memorize la secuencia");
+    	do {
+    		
+    		System.out.println("memorize la secuencia cuando este listo pulse enter ");
     		 
-    		 mostrarSecuencia(secuencia + i);
+    		 mostrarSecuencia(secuencia ++);
         	 System.out.println();
         	 
         	 entrada.nextLine();
@@ -197,50 +226,37 @@ public class Motor {
         	  for (int j=0; j<50; j++) {
 			 System.out.println();
 		 	}
-        	 
-        	 entrada.nextLine();
-        	 
+    		
         	 System.out.println("ESCRIBA en el orden correcto la primera letra de los colores MEMORIZADOS ");
-        	 
-        	 System.out.println();
-        	 
-        	
-        	 char miChar =entrada.nextLine().charAt(0);
-        	
-        	 
-        	 while (  fallo == comprobarFallo( i , charToColor(miChar))) {
-        		 
-        		 
-        		 System.out.println("correcto");
-        		 
-        	  
-        	 } 
-        	 
-        	
-     
-        	 
-        	 
-        	
-        		 
-        		 		 
-        		 
-        	 
-      
-        		 
-        		
-        		 
-        	 
-        	 
-        	 
-        		
-        		  
-        	  
-        	  
-        	  
-        	  
-        	  
-    	 
+         	 
+         	    System.out.println();
+         	 
+         	    
+         	 
+         	    char miChar =entrada.next().charAt(0);
+         	    fallo=false;
+         	   
+         	 
+         	  if(comprobarFallo(0, charToColor(miChar)) == fallo){
+         		  
+         		 
+         		
+         	  }else {
+  				 fallo =true;
+  				 System.out.println("fallaste");
+  				entrada.nextLine();
+  			 }
+         	
+         	
+         	
+    		
+    	}while (fallo=true); 
+    		
+    	System.exit(0);
     	
+    	
+    	
+    		    	 
     	 
     	 }
     	 
