@@ -28,14 +28,14 @@ public class Jugador {
 		
 	}
 	/**
-	 * Método setter jugador
+	 * metodo setter jugador
 	 */
 	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 	/**
-	 * Método getter puntuación
+	 * metodo getter puntuación
 	 * @return
 	 */
 	
@@ -44,7 +44,7 @@ public class Jugador {
 		
 	}
 	/**
-	 * Método setter puntuación
+	 * metodo setter puntuación
 	 */
 	
 	public void setPuntuacion(int puntuacion) {
