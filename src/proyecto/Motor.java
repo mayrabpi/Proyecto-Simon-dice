@@ -9,9 +9,13 @@ import java.util.Random ;
 
 public class Motor {
 	
+	
+	 
 	public enum tColores{ROJO,VERDE,AZUL,DORADO;}
-    private Scanner entrada=new Scanner(System.in);
-    private  int max_colores_seq=12;
+	
+	private Scanner entrada=new Scanner(System.in);
+	private Scanner entrada1=new Scanner(System.in);
+    final int max_colores_seq=12;
     private tColores [] secuenciaColores = new tColores[max_colores_seq];
     private String nombre;
     
@@ -23,10 +27,6 @@ public class Motor {
     public Motor(){
     	
     	this.nombre = entrada.nextLine();
-    //Colores [] secuenciaColores = new tColores[max_colores_seq];
-        
-    	
-    	
     	
     	
     }
@@ -38,33 +38,35 @@ public class Motor {
   public tColores charToColor (char _color) {
 	  
 	  
-	  tColores charColor=null ;
+	   char charColor=Character.toUpperCase(_color);
 	  
-	  switch (_color) {
+	  switch (charColor) {
 	  case 'R':
-		  charColor= tColores.ROJO;
-		  break;
+		  return  tColores.ROJO;
+		  
 	  case 'V':
-		  charColor= tColores.VERDE;
-		  break;
+		  return tColores.VERDE;
+		 
 	  case 'A':
-		  charColor= tColores.AZUL;
-		  break;
+		  return tColores.AZUL;
+		
 	  case 'D':
-		  charColor= tColores.DORADO;
-		  break;
+		  return tColores.DORADO;
+		 
       default :
-    	  System.out.println(" no es correcto");
+    	  return null;
 	  	  
 	  }
-		return charColor;
 		
-		/**
-		 *Método intColor, este método recibe un int y devuelve la posición del color 
-		 *  @param _numero representa el número entero
-		 *  @return
-		 */
+		
   }
+  
+
+	/**
+	 *Método intoColor, este método recibe un int y devuelve la posición del color 
+	 *  @param _numero representa el número entero
+	 *  @return
+	 */
     
     public tColores intTocolor (int _numero) {
     	
@@ -90,7 +92,7 @@ public class Motor {
     
     	
     	/**
-    	 *Método generarSecuencia, Este método genera una secuencia de colores de forma aleatoria , la que se almacenará en el array
+    	 *Método generarSecuencia, Este metodo genera una secuencia de colores de forma aleatoria , la que se almacenará en el array
     	 * @param _numColores representa el número de colores que tiene el tipo enum tColores
     	 */
     }
@@ -105,18 +107,18 @@ public class Motor {
     	}
     	
     	/**
-    	 *Método comprobarFallo, este método comprueba si el color introducido por el usuario es correcto o no.  
+    	 *Metodo comprobarFallo, este metodo comprueba si el color introducido por el usuario es correcto o no.  
     	 *@param _index, _tColores
     	 */
     }
     	
     	public boolean comprobarFallo(int _index, tColores _color) {
     	
-    		boolean comprobar = false;
+    		boolean fallo = false;
     		if ( _color != this.secuenciaColores[_index]) {
-    			comprobar= true;
+    			fallo= true;
     		}
-    		return comprobar;
+    		return fallo;
     	
     
     }
@@ -167,7 +169,7 @@ public class Motor {
     	  return  color;
       }
       /**
-       * Este metodo que lleva el control del juego 
+       * Este metodo  lleva el control del juego 
        */
       
       public void start () {
@@ -202,57 +204,71 @@ public class Motor {
       }
      
       public void play() {
-    	  generarSecuencia(12);
+    	  
+    	  generarSecuencia(max_colores_seq);
     	  
     	     int secuencia=3;
     	     int puntuacion;
-    	     boolean fallo = false;
+    	     boolean fallo = true;
+    	     int comprobar=0;
     	     
-    	 
+    	     	 
+    	     // for (int i =0; i< max_colores_seq - 2; i++ ) {
     		 
-    		 	 
-    	      for (int i =0; i<max_colores_seq - 2;i++ ) {
     		 
-    		 entrada.nextLine();
     	do {
     		
-    		System.out.println("memorize la secuencia cuando este listo pulse enter ");
+    		System.out.println("memorize la secuencia  de colores cuando este listo pulse enter ");
     		 
     		 mostrarSecuencia(secuencia ++);
         	 System.out.println();
         	 
         	 entrada.nextLine();
+        	
         	 
         	  for (int j=0; j<50; j++) {
-			 System.out.println();
-		 	}
+        		  System.out.println();
+			 
+		 	   }
     		
         	 System.out.println("ESCRIBA en el orden correcto la primera letra de los colores MEMORIZADOS ");
          	 
          	    System.out.println();
-         	 
          	    
-         	 
-         	    char miChar =entrada.next().charAt(0);
-         	    fallo=false;
+         	   
+         	    
+         	    
+         	    while( comprobar < max_colores_seq && fallo) {
+         	    	char miChar =entrada1.next().charAt(0);
+         	    	
+         	    	if(comprobarFallo(comprobar, charToColor(miChar))== false) {
+ 	    			 System.out.println("correcto");	
+ 	    			 comprobar++;
+ 	    			
+ 	    				 
+ 	    			 }else {
+ 	    				 System.out.println("no es correcto");
+ 	    				 fallo=true;
+ 	    			 }
+         	    	
+         	    }
          	   
          	 
-         	  if(comprobarFallo(0, charToColor(miChar)) == fallo){
-         		  
-         		 
-         		
-         	  }else {
-  				 fallo =true;
-  				 System.out.println("fallaste");
-  				entrada.nextLine();
-  			 }
-         	
-         	
-         	
+         	       
+         	    	  /*if(comprobarFallo(comprobar, charToColor(miChar))== false) {
+      	    			 System.out.println("correcto");	
+      	    			 
+      	    			
+      	    				 
+      	    			 }*/
+      	    	    
+         	 
+         	 
+    	}while (fallo==true); 
+    	
+    	 System.out.println("PERDISTE");
     		
-    	}while (fallo=true); 
-    		
-    	System.exit(0);
+    	
     	
     	
     	
@@ -261,7 +277,7 @@ public class Motor {
     	 }
     	 
     	 
-    	 }
+    	 
 	   
    
     
