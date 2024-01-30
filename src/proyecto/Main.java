@@ -15,7 +15,7 @@ public class Main {
 	 * 
 	 */
 		
-		Motor miJuego = new Motor();
+		Engine miJuego = new Engine();
 		
 		miJuego.start();
 		
