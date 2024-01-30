@@ -175,8 +175,10 @@ public class Engine {
       public void start () {
     	 
     	  
-    	 System.out.println("Bienvenido a Simon Dice ");
- 		 System.out.println("Cual es tu nombre ");
+    	 System.out.println("Bienvenido a Simon Dice!!! ");
+    	 System.out.println(" ");
+    	 
+ 		 System.out.println("¿Cual es tu nombre? ");
  		 
  		 
  		 this.nombre=entrada.nextLine();
@@ -215,6 +217,7 @@ public class Engine {
     	     int secuencia=3;
     	     int puntuacion;
     	     boolean fallo = true;
+    	     int numSecuencia=0;
     	     
     	     
     	     	 
@@ -241,10 +244,7 @@ public class Engine {
 			 
 		 	   }
     		
-        	 System.out.println("ESCRIBA en el orden correcto la primera letra de los colores MEMORIZADOS ");
-         	 
-         	    System.out.println();
-         	    
+        	
          	   
          	    int i =0;
          	    
@@ -266,12 +266,12 @@ public class Engine {
          	    	
          	    
          	    }
-         	 
+         	     numSecuencia++;
          	       
          	    if(fallo && secuencia< max_colores_seq) {
          	    	     
          	    	
-      	    			 System.out.println("siguiente secuencia" );
+      	    			 System.out.println("siguiente secuencia : "+ numSecuencia );
       	    			 
       	    			 secuencia++;
       	    			 
@@ -286,7 +286,9 @@ public class Engine {
          	 
     	}while (fallo==true); 
     	
-    	 System.out.println("PERDISTE");
+    	 System.out.println("Lo siento has perdido, vuelve a intentarlo ");
+    	 System.out.println(" ");
+    	 
     	 start();
     		
     	
