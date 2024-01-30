@@ -7,7 +7,7 @@ import java.util.Random ;
  * @author Mayra
  */
 
-public class Motor {
+public class Engine {
 	
 	
 	 
@@ -24,7 +24,7 @@ public class Motor {
    * constructor  
    */
     
-    public Motor(){
+    public Engine(){
     	
     	this.nombre = entrada.nextLine();
     	
@@ -114,9 +114,9 @@ public class Motor {
     	
     	public boolean comprobarFallo(int _index, tColores _color) {
     	
-    		boolean fallo = false;
+    		boolean fallo = true;
     		if ( _color != this.secuenciaColores[_index]) {
-    			fallo= true;
+    			fallo= false;
     		}
     		return fallo;
     	
@@ -202,6 +202,11 @@ public class Motor {
  		 }while (opcion !=0);
  				  
       }
+      
+      /**
+       * Metodo que lleva el control del juego, sera el encargado de  controlar la secuencia en la que se encuentre el juego
+       * 
+       */
      
       public void play() {
     	  
@@ -210,20 +215,25 @@ public class Motor {
     	     int secuencia=3;
     	     int puntuacion;
     	     boolean fallo = true;
-    	     int comprobar=0;
+    	     
     	     
     	     	 
-    	     // for (int i =0; i< max_colores_seq - 2; i++ ) {
+    	     /* for (int i =0; i< max_colores_seq - 2; i++ ) {
+    	      
+    	      }*/
     		 
     		 
-    	do {
+    	while (secuencia<= max_colores_seq && fallo) {
     		
     		System.out.println("memorize la secuencia  de colores cuando este listo pulse enter ");
     		 
-    		 mostrarSecuencia(secuencia ++);
-        	 System.out.println();
+    		 mostrarSecuencia(secuencia );
+    		 
+        	
         	 
         	 entrada.nextLine();
+        	 entrada1.nextLine();
+        	 
         	
         	 
         	  for (int j=0; j<50; j++) {
@@ -236,37 +246,48 @@ public class Motor {
          	    System.out.println();
          	    
          	   
+         	    int i =0;
          	    
-         	    
-         	    while( comprobar < max_colores_seq && fallo) {
-         	    	char miChar =entrada1.next().charAt(0);
+         	    while( i < secuencia && fallo) {
          	    	
-         	    	if(comprobarFallo(comprobar, charToColor(miChar))== false) {
- 	    			 System.out.println("correcto");	
- 	    			 comprobar++;
- 	    			
- 	    				 
+         	    	
+         	    	char miChar =entrada1.next().charAt(0);
+    	    	
+         	    	if(comprobarFallo(i, charToColor(miChar))) {
+ 	    			 System.out.println("correcto ");	
+ 	    			 i++;
+ 	    			 
+ 	  	 
  	    			 }else {
+ 	    				 fallo=false;
  	    				 System.out.println("no es correcto");
- 	    				 fallo=true;
+ 	    				
  	    			 }
          	    	
+         	    
          	    }
-         	   
          	 
          	       
-         	    	  /*if(comprobarFallo(comprobar, charToColor(miChar))== false) {
-      	    			 System.out.println("correcto");	
+         	    if(fallo && secuencia< max_colores_seq) {
+         	    	     
+         	    	
+      	    			 System.out.println("siguiente secuencia" );
+      	    			 
+      	    			 secuencia++;
       	    			 
       	    			
       	    				 
-      	    			 }*/
+      	    	   }else if (fallo && secuencia == max_colores_seq ) {
+      	    				 System.out.println("Enhorabuena has ganado!!!!!!");
+      	    				 entrada.nextLine();
+      	    	     }
       	    	    
-         	 
+         	    
          	 
     	}while (fallo==true); 
     	
     	 System.out.println("PERDISTE");
+    	 start();
     		
     	
     	
