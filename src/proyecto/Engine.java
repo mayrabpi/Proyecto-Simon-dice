@@ -160,8 +160,8 @@ public class Engine {
 		System.out.println("¿Cual es tu nombre? ");
 
 		this.nombre = entrada.nextLine();
-		Jugador jugador = new Jugador(" ");
-		jugador.setNombre(nombre);
+		Jugador jugador = new Jugador(nombre);
+		
 
 		System.out.println("Hola " + jugador.getNombre() + " pulsa ENTER para empezar ");
 		entrada.nextLine();
@@ -191,13 +191,14 @@ public class Engine {
 		int secuencia = 3;
 		int puntuacion;
 		boolean fallo = true;
-		int numSecuencia = 0;
+		int numSecuencia = 1;
 
 		do {
 
 			while (secuencia <= max_colores_seq && fallo) {
 
 				System.out.println("memorize la secuencia  de colores cuando este listo pulse enter ");
+				System.out.println("secuencia nº: " + numSecuencia);
 
 				mostrarSecuencia(secuencia);
 				entrada.nextLine();
@@ -224,24 +225,35 @@ public class Engine {
 				numSecuencia++;
 
 				if (fallo && secuencia < max_colores_seq) {
-					System.out.println("siguiente secuencia : " + numSecuencia);
+					
 					secuencia++;
 
 				} else if (fallo && secuencia == max_colores_seq) {
 					System.out.println("Enhorabuena has ganado!!!!!!");
 					entrada.nextLine();
 					start();
+
 				}
 			}
-		} while (fallo == false || secuencia <= max_colores_seq);
-		{
-
-		}
-
+		} while (fallo = false );
+		
 		System.out.println("Lo siento has perdido, vuelve a intentarlo ");
 		System.out.println(" ");
-
 		start();
+
+				
+			
+		
+		
+		    
+		
+		
+		
+		
+
+		
+
+	
 
 	}
 
