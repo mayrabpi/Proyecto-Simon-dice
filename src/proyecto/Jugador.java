@@ -11,11 +11,12 @@ public class Jugador {
 	private int puntuacion;
 	
 	/**
-	 * constructora
+	 * 
+	 * @param nombre
 	 */
-	public Jugador (String nombre) {
+	public Jugador () {
 		
-		this.nombre=" ";
+		this.nombre=nombre;
 		this.puntuacion=0;
 		
 	}
@@ -28,27 +29,28 @@ public class Jugador {
 		
 	}
 	/**
-	 * metodo setter jugador
+	 * 
+	 * @param nombre
 	 */
-	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 	/**
 	 * metodo getter puntuación
 	 * @return
-	 */
-	
+	 */	
 	public int getPuntuacion() {
+		puntuacion+=1;
 		return this.puntuacion;
 		
 	}
 	/**
-	 * metodo setter puntuación
+	 * 
+	 * @param puntuacion
 	 */
-	
 	public void setPuntuacion(int puntuacion) {
-		this.puntuacion=0;
+		this.puntuacion=puntuacion;
 	}
+	
 	
 }
