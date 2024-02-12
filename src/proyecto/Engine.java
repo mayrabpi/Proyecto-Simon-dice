@@ -15,15 +15,17 @@ public class Engine {
 
 	private Scanner entrada = new Scanner(System.in);
 	private Scanner entrada1 = new Scanner(System.in);
-	private final int max_colores_seq = 6;
+	private final int max_colores_seq = 15;
 	private tColores[] secuenciaColores = new tColores[max_colores_seq];
 	private String nombre;
+	private int ayuda;
 
 	/**
 	 * constructor
 	 */
 	public Engine() {
 		this.nombre = entrada.nextLine();
+		this.ayuda=3;
 
 	}
 
@@ -163,6 +165,25 @@ public class Engine {
 		}
 		return color;
 	}
+	/**
+	 * Metodo que permite utiliza las ayudas disponibles. si no quedan, deberá mostrar un mensaje informando sobre ello.
+	 * @param _idex indice del color i-esimo que desea comprobar,
+	 * @return
+	 */
+	public boolean usarAyuda(int _index) {
+		if(this.ayuda>0) {
+			System.out.println("tienes "+ this.ayuda + " ayudas ,  siguiente color es: "+ this.secuenciaColores[_index]+ " introducelo ");
+			
+			this.ayuda--;
+			return true;
+		}else {
+			System.out.println("no te quedan ayudas");
+			return false;
+		}
+		}
+		
+		
+	
 
 	/**
 	 * Este metodo lleva el control del juego
@@ -195,10 +216,8 @@ public class Engine {
 				break;
 			}
 		} while (opcion != 0);
-
 	}
 	
-
 	/**
 	 * Metodo que lleva el control del juego, sera el encargado de controlar la
 	 * secuencia en la que se encuentre el juego
@@ -208,7 +227,7 @@ public class Engine {
 		if(modo == tModo.FACIL) {
 			generarSecuencia(4);
 		}else {
-			generarSecuencia(6);
+			generarSecuencia(7);
 		}
 		Jugador puntuacion = new Jugador();
 		puntuacion.setPuntuacion(0);
@@ -217,9 +236,11 @@ public class Engine {
 		int numSecuencia = 1;
 
 		do {
-			while (secuencia <=this.max_colores_seq && fallo) {
+			
+			
+			
 
-				
+			while (secuencia <=this.max_colores_seq && fallo) {
 				System.out.println("secuencia nº: "+ numSecuencia);
 				System.out.println("memorize la secuencia  de colores cuando este listo pulse enter ");
 
@@ -230,43 +251,50 @@ public class Engine {
 				for (int j=0; j<50; j++) {
 					System.out.println();
 				}
-				System.out.println("introduzca la secuencia de colores (x para ayuda)");
 				
+				System.out.println("introduzca la secuencia de colores (x para ayuda)");
 
 				int i = 0;
+				
 				while (i < secuencia && fallo) {
 					char miChar = entrada1.next().charAt(0);
-
-					if (comprobarFallo(i, charToColor(miChar))) {
+					
+		
+					if(miChar =='x') {
+						usarAyuda(i);
+						miChar =entrada1.next().charAt(0);
+					}
+					
+				 if (comprobarFallo(i, charToColor(miChar))) {
 						System.out.println("correcto ya tienes : "+ puntuacion.getPuntuacion()+" puntos" );
 						i++;
-						
-					
-
+						System.out.println();
+												
 					} else {
-						fallo = false;
+						
 						System.out.println("Lo siento has perdido, vuelve a intentarlo");
+						entrada.nextLine();
+						start();
+										
 					}
-
 				}
-			
 				numSecuencia++;
-			
 
 				if (fallo && secuencia < this.max_colores_seq) {
 					
 					secuencia++;
-
+					
 				} else if (fallo && secuencia ==this.max_colores_seq) {
 					System.out.println("Enhorabuena has ganado!!!!!! y sumado 40 puntos  "+" tu puntuacion final es "+ (puntuacion.getPuntuacion()+40)+" puntos");
-					entrada.nextLine();
+					entrada.nextLine();	
 					start();
-
 				}
 			}
 			
 			
-		} while (fallo = false && secuencia ==this. max_colores_seq);
+		}	 while (fallo==false && secuencia ==this. max_colores_seq);	
+		
+		
 		
 	
 		
