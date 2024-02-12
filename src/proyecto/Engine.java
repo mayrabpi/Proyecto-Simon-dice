@@ -15,8 +15,8 @@ public class Engine {
 
 	private Scanner entrada = new Scanner(System.in);
 	private Scanner entrada1 = new Scanner(System.in);
-	private final int max_colores_seq = 15;
-	private tColores[] secuenciaColores = new tColores[max_colores_seq];
+	private final int MAX_COLORES_SEQ = 15;
+	private tColores[] secuenciaColores = new tColores[MAX_COLORES_SEQ];
 	private String nombre;
 	private int ayuda;
 
@@ -24,9 +24,7 @@ public class Engine {
 	 * constructor
 	 */
 	public Engine() {
-		this.nombre = entrada.nextLine();
 		this.ayuda=3;
-
 	}
 
 	/**
@@ -56,9 +54,7 @@ public class Engine {
 			return tColores.NARANJA;
 		default:
 			return null;
-
 		}
-
 	}
 	/**
 	 * Metodo intoColor, este método recibe un int y devuelve la posición del color
@@ -114,9 +110,9 @@ public class Engine {
 	 * Metodo comprobarFallo, este metodo comprueba si el color introducido por el
 	 * usuario es correcto o no.
 	 * 
-	 * @param _index
+	 * @param _index indice del color que se va a comprobar 
 	 * @param _color
-	 * @return
+	 * @return fallo  true si no hay fallo , fallo false si hay fallo
 	 */
 	public boolean comprobarFallo(int _index, tColores _color) {
 		boolean fallo = true;
@@ -140,7 +136,7 @@ public class Engine {
 	}
 
 	/**
-	 * Este metodo muestra el menu para que el jugador elija que hacer, si jugar o
+	 *  Este metodo muestra el menu para que el jugador elija que hacer, si jugar o
 	 * salir
 	 */
 	public void menu() {
@@ -167,13 +163,12 @@ public class Engine {
 	}
 	/**
 	 * Metodo que permite utiliza las ayudas disponibles. si no quedan, deberá mostrar un mensaje informando sobre ello.
-	 * @param _idex indice del color i-esimo que desea comprobar,
-	 * @return
+	 * @param _idex indice del color i-esimo que desea comprobar.
+	 * @return true si quedan ayudas, false si no quedan ayudas.
 	 */
 	public boolean usarAyuda(int _index) {
 		if(this.ayuda>0) {
-			System.out.println("tienes "+ this.ayuda + " ayudas ,  siguiente color es: "+ this.secuenciaColores[_index]+ " introducelo ");
-			
+			System.out.println("tienes "+ this.ayuda + " ayudas ,  siguiente color es: "+ this.secuenciaColores[_index]+ ", introducelo ");			
 			this.ayuda--;
 			return true;
 		}else {
@@ -181,23 +176,18 @@ public class Engine {
 			return false;
 		}
 		}
-		
-		
-	
-
+			
 	/**
-	 * Este metodo lleva el control del juego
+	 * Este metodo lleva el control del juego con un menu para que el jugador elija que desea hacer 
 	 */
 	public void start() {
 		System.out.println("Bienvenido a Simon Dice!!! ");
 		System.out.println(" ");
 		System.out.println("¿Cual es tu nombre? ");
 
-		this.nombre = entrada.nextLine();
-		Jugador jugador = new Jugador();
-		jugador.setNombre(nombre);
-		
-
+		String nombre = entrada.nextLine();
+		Jugador jugador = new Jugador(nombre);
+	
 		System.out.println("Hola " + jugador.getNombre() + " pulsa ENTER para empezar ");
 		entrada.nextLine();
 		menu();
@@ -209,28 +199,32 @@ public class Engine {
 				System.out.println("Abandonas el juego");
 				break;
 			case 1:
-				play(tModo.FACIL);
+				int resultado = play(tModo.FACIL);
+				jugador.setPuntuacion(resultado);
+				
 				break;
 			case 2:
-				play(tModo.DIFICIL);
+				int resultado1 = play(tModo.DIFICIL);
+				jugador.setPuntuacion(resultado1);
 				break;
 			}
 		} while (opcion != 0);
 	}
-	
 	/**
-	 * Metodo que lleva el control del juego, sera el encargado de controlar la
-	 * secuencia en la que se encuentre el juego
+	 * Metodo que llevara el control del juego. Sera el encargado de controlar la secuencia en la que se encuentra el juego
 	 * 
+	 * @param tModo  modo facil o dificil segun el modo de juego que elija el jugador
+	 * @return puntuacion
 	 */
-	public void play(tModo modo) {
+	public int play(tModo modo) {
+		int puntuacion=0;
 		if(modo == tModo.FACIL) {
 			generarSecuencia(4);
 		}else {
 			generarSecuencia(7);
 		}
-		Jugador puntuacion = new Jugador();
-		puntuacion.setPuntuacion(0);
+		
+		Jugador jugador = new Jugador(nombre);
 		int secuencia = 3;
 		boolean fallo = true;
 		int numSecuencia = 1;
@@ -238,9 +232,7 @@ public class Engine {
 		do {
 			
 			
-			
-
-			while (secuencia <=this.max_colores_seq && fallo) {
+			while (secuencia <=this.MAX_COLORES_SEQ && fallo) {
 				System.out.println("secuencia nº: "+ numSecuencia);
 				System.out.println("memorize la secuencia  de colores cuando este listo pulse enter ");
 
@@ -254,66 +246,43 @@ public class Engine {
 				
 				System.out.println("introduzca la secuencia de colores (x para ayuda)");
 
-				int i = 0;
+				int indice = 0;
 				
-				while (i < secuencia && fallo) {
+				while (indice < secuencia && fallo) {
 					char miChar = entrada1.next().charAt(0);
-					
-		
+						
 					if(miChar =='x') {
-						usarAyuda(i);
+						usarAyuda(indice);
 						miChar =entrada1.next().charAt(0);
 					}
 					
-				 if (comprobarFallo(i, charToColor(miChar))) {
-						System.out.println("correcto ya tienes : "+ puntuacion.getPuntuacion()+" puntos" );
-						i++;
+				 if (comprobarFallo(indice, charToColor(miChar))) {
+						System.out.println("correcto ya tienes : "+jugador.getPuntuacion() +" puntos" );
+						indice++;
 						System.out.println();
 												
 					} else {
 						
 						System.out.println("Lo siento has perdido, vuelve a intentarlo");
-						entrada.nextLine();
-						start();
-										
+						entrada.nextLine();						
 					}
 				}
 				numSecuencia++;
 
-				if (fallo && secuencia < this.max_colores_seq) {
+				if (fallo && secuencia < this.MAX_COLORES_SEQ) {
 					
 					secuencia++;
 					
-				} else if (fallo && secuencia ==this.max_colores_seq) {
-					System.out.println("Enhorabuena has ganado!!!!!! y sumado 40 puntos  "+" tu puntuacion final es "+ (puntuacion.getPuntuacion()+40)+" puntos");
+				} else if (fallo && secuencia ==this.MAX_COLORES_SEQ) {
+					System.out.println("Enhorabuena has ganado!!!!!! y sumado 40 puntos  "+" tu puntuacion final es "+ (jugador.getPuntuacion()+40)+" puntos");
 					entrada.nextLine();	
-					start();
+				
 				}
 			}
-			
-			
-		}	 while (fallo==false && secuencia ==this. max_colores_seq);	
-		
-		
-		
+					
+		}	 while (fallo==false && secuencia ==this.MAX_COLORES_SEQ);	
 	
-		
-		
-
-				
-			
-		
-		
-		    
-		
-		
-		
-		
-
-		
-
-	
+	return puntuacion;
 
 	}
-
 }

@@ -14,7 +14,7 @@ public class Jugador {
 	 * 
 	 * @param nombre
 	 */
-	public Jugador () {
+	public Jugador (String nombre) {
 		
 		this.nombre=nombre;
 		this.puntuacion=0;
