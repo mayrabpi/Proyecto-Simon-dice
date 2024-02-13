@@ -1,4 +1,4 @@
-package proyecto;
+package main;
 
 import java.util.Scanner;
 import java.util.Random;
@@ -140,7 +140,7 @@ public class Engine {
 	 * salir
 	 */
 	public void menu() {
-		System.out.println("¿Qué deseas hacer? \n 0 salir \n 1 jugar modo fácil \n 2 jugar modo dificil  ");
+		System.out.println("¿Qué deseas hacer? \n  0 - salir \n 1 - jugar modo fácil \n 2 - jugar modo dificil \n 3 - Ver 10 mejores jugadores \n 4 - Ver jugador(es) con la puntuación mas alta  ");
 	}
 
 	public String mostrarColor(tColores _color) {
