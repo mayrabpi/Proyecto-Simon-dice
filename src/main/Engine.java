@@ -15,7 +15,7 @@ public class Engine {
 
 	private Scanner entrada = new Scanner(System.in);
 	private Scanner entrada1 = new Scanner(System.in);
-	private final int MAX_COLORES_SEQ = 15;
+	private final int MAX_COLORES_SEQ = 6;
 	private tColores[] secuenciaColores = new tColores[MAX_COLORES_SEQ];
 	private String nombre;
 	private int ayuda;
@@ -208,7 +208,7 @@ public class Engine {
 				jugador.setPuntuacion(resultado1);
 				break;
 			}
-		} while (opcion != 0);
+		}while (opcion!=0);
 	}
 	/**
 	 * Metodo que llevara el control del juego. Sera el encargado de controlar la secuencia en la que se encuentra el juego
@@ -228,10 +228,8 @@ public class Engine {
 		int secuencia = 3;
 		boolean fallo = true;
 		int numSecuencia = 1;
-
 		do {
-			
-			
+
 			while (secuencia <=this.MAX_COLORES_SEQ && fallo) {
 				System.out.println("secuencia nº: "+ numSecuencia);
 				System.out.println("memorize la secuencia  de colores cuando este listo pulse enter ");
@@ -248,39 +246,36 @@ public class Engine {
 
 				int indice = 0;
 				
-				while (indice < secuencia && fallo) {
+				while (indice <secuencia && fallo) {
 					char miChar = entrada1.next().charAt(0);
 						
 					if(miChar =='x') {
 						usarAyuda(indice);
+						
 						miChar =entrada1.next().charAt(0);
+						
 					}
 					
-				 if (comprobarFallo(indice, charToColor(miChar))) {
+					else if(comprobarFallo(indice, charToColor(miChar))) {
 						System.out.println("correcto ya tienes : "+jugador.getPuntuacion() +" puntos" );
 						indice++;
-						System.out.println();
-												
+						System.out.println();								
 					} else {
-						
-						System.out.println("Lo siento has perdido, vuelve a intentarlo");
-						entrada.nextLine();						
+						System.out.println("Lo siento has perdido, vuelve a intentarlo");					
 					}
-				}
-				numSecuencia++;
-
+				}	
+				numSecuencia++;				 
 				if (fallo && secuencia < this.MAX_COLORES_SEQ) {
 					
-					secuencia++;
-					
-				} else if (fallo && secuencia ==this.MAX_COLORES_SEQ) {
+					secuencia++;		
+				} 
+				 else if (fallo && secuencia ==this.MAX_COLORES_SEQ) {
 					System.out.println("Enhorabuena has ganado!!!!!! y sumado 40 puntos  "+" tu puntuacion final es "+ (jugador.getPuntuacion()+40)+" puntos");
 					entrada.nextLine();	
-				
-				}
-			}
-					
-		}	 while (fallo==false && secuencia ==this.MAX_COLORES_SEQ);	
+			
+				}			
+			}//while (fallo && secuencia ==this.MAX_COLORES_SEQ);
+		}while (fallo==false && secuencia ==this.MAX_COLORES_SEQ);
 	
 	return puntuacion;
 
