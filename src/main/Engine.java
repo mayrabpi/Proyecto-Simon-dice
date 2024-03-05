@@ -202,7 +202,7 @@ public class Engine {
 		Jugador jugador4 = new Jugador("Pepe");
 		Jugador jugador5= new Jugador("lola");
 		
-		jugador1.setPuntuacion(100);
+		jugador1.setPuntuacion(200);
 		jugador2.setPuntuacion(150);		
 		jugador3.setPuntuacion(200);
 		jugador4.setPuntuacion(80);

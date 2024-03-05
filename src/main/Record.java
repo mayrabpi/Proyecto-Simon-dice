@@ -13,16 +13,21 @@ public class Record {
 	 */
 	public Record() {
 		this.contador=0;
+		
 	
 	}
 	/**
 	 * Metodo para añadir jugadores al array
 	 * @param jugador de la clase Jugador
+	 * complejidad O1
 	 */
 	public void addJugador(Jugador jugador) {
-		
-		this.jugadores[contador]=jugador;
-		this.contador++;		
+		if(contador< MAX_JUGADORES) {
+			this.jugadores[contador]=jugador;
+			this.contador++;
+			
+		}else
+			System.out.println("No hay espacio disponible ");
 	}
 	/**
 	 * Ordena el Array, usaremos un algoritmo de ordenacion el metodo de la burbuja 
@@ -56,9 +61,13 @@ public class Record {
 	 * Muestra el jugador (o jugadores) con la puntuacion mas alta 
 	 */
 	public void showBestPlayer() {
-		ordenarRanking();	
-			System.out.println(this.jugadores[0].getPuntuacion()+" "+ this.jugadores[0].getNombre());			
+		ordenarRanking();
+		int i=0;
+		while(this.jugadores[i]== this.jugadores[0]&& i<=this.contador ) {
+			i++;
+			System.out.println(this.jugadores[0].getPuntuacion()+" "+ this.jugadores[i].getNombre());			
 	
+	}
 	}
 
 }
