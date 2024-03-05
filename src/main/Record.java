@@ -12,39 +12,84 @@ public class Record {
 	 * constructor
 	 */
 	public Record() {
-		this.contador=0;		
+		this.contador=0;
+	
 	}
 	/**
-	 * 
-	 * @return contador
+	 * Metodo para añadir jugadores al array
+	 * @param jugador de la clase Jugador
 	 */
-	public int getContador() {
-		return this.contador;
-	}
-	public String getjugadorNombre(String nombre) {
-		//while
-		return nombre;
+	public void addJugador(Jugador jugador) {
+		
+		this.jugadores[contador]=jugador;
+		this.contador++;		
 	}
 	/**
-	 * Ordena el Array, usaremos un algoritmo del metodo de la burbuja 
+	 * Ordena el Array, usaremos un algoritmo de ordenacion el metodo de la burbuja 
+	 * complejidad 0(n)
 	 */
 	public void ordenarRanking() {
-		
+		for(int i=0;i<this.contador;i++) {
+			for(int j=0;j<this.contador - i -1;j++) {
+				if (this.jugadores[j].getPuntuacion() < this.jugadores[j+1].getPuntuacion()) {
+				Jugador guardar = this.jugadores[j+1];
+				this.jugadores[j+1]=this.jugadores[j];
+				this.jugadores[j]= guardar;
+				}
+			}		
+		}		
 	}
 	/**
-	 * Muestra el ranking de los 10 mejores jugadores
+	 * Muestra el ranking de los n mejores jugadores
 	 */
 	public void showRanking() {
-		
+		ordenarRanking();
+		System.out.println("Los 10 mejores jugadores son: ");
+		int puesto=0;
+		for( int i=0; i< this.MAX_JUGADORES;i++) {
+	
+			puesto++;
+			System.out.println( puesto+". "+ this.jugadores[i].getNombre()+ " " + this.jugadores[i].getPuntuacion() );
+		}	
 	}
 	/**
 	 * Muestra el jugador (o jugadores) con la puntuacion mas alta 
 	 */
 	public void showBestPlayer() {
-		
+		ordenarRanking();	
+			System.out.println(this.jugadores[0].getPuntuacion()+" "+ this.jugadores[0].getNombre());			
+	
 	}
-	
-	
-	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -14,10 +14,10 @@ public class Jugador {
 	 * 
 	 * @param nombre
 	 */
-	public Jugador (String nombre) {
+	public Jugador (String nombre ) {
 		
 		this.nombre=nombre;
-		this.puntuacion=0;
+		
 		
 	}
 	/**
@@ -40,7 +40,7 @@ public class Jugador {
 	 * @return
 	 */	
 	public int getPuntuacion() {
-		puntuacion+=5;
+		//puntuacion+=5;
 		return this.puntuacion;
 		
 	}
@@ -48,8 +48,8 @@ public class Jugador {
 	 * 
 	 * @param puntuacion
 	 */
-	public void setPuntuacion(int puntuacion) {
-		this.puntuacion=puntuacion;
+	public void setPuntuacion(int puntos) {
+		this.puntuacion=puntos;
 	}
 	
 	
