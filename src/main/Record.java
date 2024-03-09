@@ -22,7 +22,7 @@ public class Record {
 	 * complejidad O1
 	 */
 	public void addJugador(Jugador jugador) {
-		if(contador< MAX_JUGADORES) {
+		if(contador<=MAX_JUGADORES) {
 			this.jugadores[contador]=jugador;
 			this.contador++;
 			
