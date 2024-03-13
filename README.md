@@ -1,1 +1,1 @@
-En este repositorio subiré un juego que se llama SIMON DICE hecho en JAVA, proyecto de la segunda evaluación de la asignatura de programación en el  primero del ciclo formativo de desarrollo de aplicaciones multiplataforma.
+En este repositorio subiré un juego que se llama SIMON DICE hecho en JAVA, proyecto de la segunda evaluación de la asignatura de programación en el  primer año del ciclo formativo de desarrollo de aplicaciones multiplataforma.
