@@ -40,7 +40,7 @@ public class Jugador {
 	 * @return
 	 */	
 	public int getPuntuacion() {
-		//puntuacion+=5;
+		puntuacion+=5;
 		return this.puntuacion;
 		
 	}

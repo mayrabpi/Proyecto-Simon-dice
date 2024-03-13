@@ -200,13 +200,27 @@ public class Engine {
 		Jugador jugador2 = new Jugador("Victor");
 		Jugador jugador3 = new Jugador("Juan");
 		Jugador jugador4 = new Jugador("Pepe");
-		Jugador jugador5= new Jugador("lola");
+		Jugador jugador5= new Jugador("Lola");
+		Jugador jugador6 =new Jugador ("lolo");
+		Jugador jugador7 =new Jugador ("Loli");
+		Jugador jugador8 =new Jugador ("Pedro");
+		Jugador jugador9 =new Jugador ("Marc");
+		//Jugador jugador10 =new Jugador ("Puri");
+		//Jugador jugador11 =new Jugador ("Puro");
 		
-		jugador1.setPuntuacion(200);
-		jugador2.setPuntuacion(150);		
+		jugador1.setPuntuacion(250);
+		jugador2.setPuntuacion(250);		
 		jugador3.setPuntuacion(200);
 		jugador4.setPuntuacion(80);
 		jugador5.setPuntuacion(95);
+		jugador6.setPuntuacion(90);
+		jugador7.setPuntuacion(55);
+		jugador8.setPuntuacion(15);
+		jugador9.setPuntuacion(195);
+		//jugador10.setPuntuacion(195);
+		//jugador11.setPuntuacion(185);
+		
+		
 		
 		
 		
@@ -215,6 +229,12 @@ public class Engine {
 		record.addJugador(jugador3);
 		record.addJugador(jugador4);
 		record.addJugador(jugador5);
+		record.addJugador(jugador6);
+		record.addJugador(jugador7);
+		record.addJugador(jugador8);
+		record.addJugador(jugador9);
+		//record.addJugador(jugador10);
+		//record.addJugador(jugador11);
 		
 		System.out.println("Hola " + jugador.getNombre() + " pulsa ENTER para empezar ");
 		entrada.nextLine();

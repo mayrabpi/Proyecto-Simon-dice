@@ -6,13 +6,14 @@ package main;
 public class Record {
 	private final int MAX_JUGADORES=10;
 	private int contador;
-	private Jugador []jugadores = new Jugador[MAX_JUGADORES];
+	private Jugador jugadores[];
 	
 	/**
 	 * constructor
 	 */
 	public Record() {
 		this.contador=0;
+		this.jugadores = new Jugador[MAX_JUGADORES];
 		
 	
 	}
@@ -49,10 +50,10 @@ public class Record {
 	 */
 	public void showRanking() {
 		ordenarRanking();
+		 
 		System.out.println("Los 10 mejores jugadores son: ");
 		int puesto=0;
 		for( int i=0; i< this.MAX_JUGADORES;i++) {
-	
 			puesto++;
 			System.out.println( puesto+". "+ this.jugadores[i].getNombre()+ " " + this.jugadores[i].getPuntuacion() );
 		}	
