@@ -63,10 +63,14 @@ public class Record {
 	public void showBestPlayer() {
 		ordenarRanking();
 		int i=0;
-		while(this.jugadores[i]== this.jugadores[0]&& i<=this.contador ) {
+		while(i< this.MAX_JUGADORES) {
+			
+		if(this.jugadores[i].getPuntuacion()== this.jugadores[0].getPuntuacion()&& i<=this.contador ) {
+			
+			System.out.println(this.jugadores[0].getPuntuacion()+" "+ this.jugadores[i].getNombre());	
 			i++;
-			System.out.println(this.jugadores[0].getPuntuacion()+" "+ this.jugadores[i].getNombre());			
-	
+		}else
+			i++;
 	}
 	}
 

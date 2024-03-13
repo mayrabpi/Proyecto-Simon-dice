@@ -1,5 +1,8 @@
 package filesPackage;
 
-public class ICustomReadFile {
+public interface ICustomReadFile {
+	public void closeReadFile();
+	public void leerJugador();
+		
 
 }

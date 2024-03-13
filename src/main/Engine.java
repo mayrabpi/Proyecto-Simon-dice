@@ -239,8 +239,8 @@ public class Engine {
 				 record.showRanking();
 				 break;
 			case 4:
-				record.showBestPlayer();
-				break;
+				 record.showBestPlayer();
+				 break;
 			}
 		}while (opcion!=0);
 	}

@@ -1,5 +1,7 @@
 package filesPackage;
 
-public class ICustomWriteFile {
+public interface ICustomWriteFile {
+	public void closeWriteFile();
+	public void escribirJugador();
 
 }
