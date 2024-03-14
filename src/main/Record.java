@@ -1,109 +1,81 @@
 package main;
+
+import java.io.*;
+
 /**
  * clase Record
  * 
  */
 public class Record {
-	private final int MAX_JUGADORES=10;
+	private final int MAX_JUGADORES = 10;
 	private int contador;
 	private Jugador jugadores[];
-	
+
 	/**
 	 * constructor
 	 */
 	public Record() {
-		this.contador=0;
+		this.contador = 0;
 		this.jugadores = new Jugador[MAX_JUGADORES];
-		
-	
 	}
 	/**
 	 * Metodo para añadir jugadores al array
-	 * @param jugador de la clase Jugador
-	 * complejidad O1
+	 * 
+	 * @param jugador de la clase Jugador complejidad O1
 	 */
 	public void addJugador(Jugador jugador) {
-		if(contador<=MAX_JUGADORES) {
-			this.jugadores[contador]=jugador;
+		if (contador <= MAX_JUGADORES) {
+			this.jugadores[contador] = jugador;
 			this.contador++;
-			
-		}else
+
+		} else
 			System.out.println("No hay espacio disponible ");
 	}
+
 	/**
-	 * Ordena el Array, usaremos un algoritmo de ordenacion el metodo de la burbuja 
+	 * Ordena el Array, usaremos un algoritmo de ordenacion el metodo de la burbuja
 	 * complejidad 0(n)
 	 */
 	public void ordenarRanking() {
-		for(int i=0;i<this.contador;i++) {
-			for(int j=0;j<this.contador - i -1;j++) {
-				if (this.jugadores[j].getPuntuacion() < this.jugadores[j+1].getPuntuacion()) {
-				Jugador guardar = this.jugadores[j+1];
-				this.jugadores[j+1]=this.jugadores[j];
-				this.jugadores[j]= guardar;
+		for (int i = 0; i < this.contador; i++) {
+			for (int j = 0; j < this.contador - i - 1; j++) {
+				if (this.jugadores[j].getPuntuacion() < this.jugadores[j + 1].getPuntuacion()) {
+					Jugador guardar = this.jugadores[j + 1];
+					this.jugadores[j + 1] = this.jugadores[j];
+					this.jugadores[j] = guardar;
 				}
-			}		
-		}		
+			}
+		}
 	}
+
 	/**
 	 * Muestra el ranking de los n mejores jugadores
 	 */
-	public void showRanking() {
-		ordenarRanking();
-		 
+	public void showRanking() {	
 		System.out.println("Los 10 mejores jugadores son: ");
-		int puesto=0;
-		for( int i=0; i< this.MAX_JUGADORES;i++) {
+		int puesto = 0;
+		for (int i = 0; i < this.MAX_JUGADORES; i++) {
 			puesto++;
-			System.out.println( puesto+". "+ this.jugadores[i].getNombre()+ " " + this.jugadores[i].getPuntuacion() );
-		}	
+			System.out.println(puesto + ". " + this.jugadores[i].getNombre() + " " + this.jugadores[i].getPuntuacion());
+		}
 	}
+
 	/**
-	 * Muestra el jugador (o jugadores) con la puntuacion mas alta 
+	 * Muestra el jugador (o jugadores) con la puntuacion mas alta
 	 */
-	public void showBestPlayer() {
-		ordenarRanking();
-		int i=0;
-		while(i< this.MAX_JUGADORES) {
-			
-		if(this.jugadores[i].getPuntuacion()== this.jugadores[0].getPuntuacion()&& i<=this.contador ) {
-			
-			System.out.println(this.jugadores[0].getPuntuacion()+" "+ this.jugadores[i].getNombre());	
-			i++;
-		}else
-			i++;
-	}
+	public void showBestPlayer() {	
+		int i = 0;
+		System.out.println("El (Los) mejor(es) jugador(es): ");
+
+		while (i < this.MAX_JUGADORES) {
+
+			if (this.jugadores[i].getPuntuacion() == this.jugadores[0].getPuntuacion() && i <= this.contador) {
+
+				System.out.println(this.jugadores[0].getPuntuacion() + " " + this.jugadores[i].getNombre());
+				i++;
+			}
+		}
+
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

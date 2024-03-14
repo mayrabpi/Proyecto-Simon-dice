@@ -116,7 +116,7 @@ public class Engine {
 	 * usuario es correcto o no.
 	 * 
 	 * @param _index indice del color que se va a comprobar 
-	 * @param tcolores _color
+	 * @param recibe por parametro el indice y el color de tipo tcolores
 	 * @return fallo  true si no hay fallo , fallo false si hay fallo
 	 */
 	public boolean comprobarFallo(int _index, tColores _color) {
@@ -171,8 +171,8 @@ public class Engine {
 	}
 	/**
 	 * Metodo que permite utiliza las ayudas disponibles. si no quedan, deberá mostrar un mensaje informando sobre ello.
-	 * @param _idex indice del color iesimo que desea comprobar.
-	 * @return true si quedan ayudas, false si no quedan ayudas.
+	 * @param recibe por parametro _index indice del color iesimo que desea comprobar.
+	 * @return retorna true si quedan ayudas, false si no quedan ayudas.
 	 */
 	public boolean usarAyuda(int _index) {
 		if(this.ayuda>0) {
@@ -256,9 +256,11 @@ public class Engine {
 				jugador.setPuntuacion(resultado1);
 				break;
 			case 3:
+				 record.ordenarRanking();
 				 record.showRanking();
 				 break;
 			case 4:
+				 record.ordenarRanking();
 				 record.showBestPlayer();
 				 break;
 			}
