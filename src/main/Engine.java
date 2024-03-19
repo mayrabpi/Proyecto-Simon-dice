@@ -1,6 +1,7 @@
 package main;
 
 import java.util.Scanner;
+import java.io.IOException;
 import java.util.Random;
 
 /**
@@ -9,14 +10,19 @@ import java.util.Random;
  * @author Mayra
  */
 public class Engine {
-/**
- * array de tipo enum para almacenar los colores 
- */
-	public enum tColores {ROJO, VERDE, AZUL, DORADO, BLANCO, MARRON, NARANJA}
-/**
- * array de tipo enum para almacenar los modos facil y dificil 
- */
-	public enum tModo{ FACIL, DIFICIL}
+	/**
+	 * array de tipo enum para almacenar los colores
+	 */
+	public enum tColores {
+		ROJO, VERDE, AZUL, DORADO, BLANCO, MARRON, NARANJA
+	}
+
+	/**
+	 * array de tipo enum para almacenar los modos facil y dificil
+	 */
+	public enum tModo {
+		FACIL, DIFICIL
+	}
 
 	private Scanner entrada = new Scanner(System.in);
 	private Scanner entrada1 = new Scanner(System.in);
@@ -24,12 +30,14 @@ public class Engine {
 	private tColores[] secuenciaColores = new tColores[MAX_COLORES_SEQ];
 	private String nombre;
 	private int ayuda;
+	private int puntos;
 
 	/**
 	 * constructor
 	 */
 	public Engine() {
-		this.ayuda=3;
+		this.ayuda = 3;
+		this.puntos = 0;
 	}
 
 	/**
@@ -61,6 +69,7 @@ public class Engine {
 			return null;
 		}
 	}
+
 	/**
 	 * Metodo intoColor, este método recibe un int y devuelve la posición del color
 	 * 
@@ -83,7 +92,7 @@ public class Engine {
 			posicion = tColores.DORADO;
 			break;
 		case 4:
-			posicion=tColores.BLANCO;
+			posicion = tColores.BLANCO;
 			break;
 		case 5:
 			posicion = tColores.MARRON;
@@ -104,20 +113,20 @@ public class Engine {
 	 */
 	public void generarSecuencia(int _numColores) {
 		Random rand = new Random();
-	
+
 		for (int i = 0; i < this.secuenciaColores.length; i++) {
 			int numAleatorio = rand.nextInt(0, _numColores);
 			this.secuenciaColores[i] = intTocolor(numAleatorio);
 		}
 	}
-	
+
 	/**
 	 * Metodo comprobarFallo, este metodo comprueba si el color introducido por el
 	 * usuario es correcto o no.
 	 * 
-	 * @param _index indice del color que se va a comprobar 
+	 * @param _index indice del color que se va a comprobar
 	 * @param recibe por parametro el indice y el color de tipo tcolores
-	 * @return fallo  true si no hay fallo , fallo false si hay fallo
+	 * @return fallo true si no hay fallo , fallo false si hay fallo
 	 */
 	public boolean comprobarFallo(int _index, tColores _color) {
 		boolean fallo = true;
@@ -140,17 +149,19 @@ public class Engine {
 		}
 	}
 
-/**
- * Este metodo muestra el menu para que el jugador elija que quiere hacer
- */
+	/**
+	 * Este metodo muestra el menu para que el jugador elija que quiere hacer
+	 */
 	public void menu() {
-		System.out.println("¿Qué deseas hacer? \n  0 - salir \n 1 - jugar modo fácil \n 2 - jugar modo dificil \n 3 - Ver 10 mejores jugadores \n 4 - Ver jugador(es) con la puntuación mas alta  ");
+		System.out.println(
+				"¿Qué deseas hacer? \n  0 - salir \n 1 - jugar modo fácil \n 2 - jugar modo dificil \n 3 - Ver 10 mejores jugadores \n 4 - Ver jugador(es) con la puntuación mas alta  ");
 	}
-/**
- * 
- * @param _color
- * @return retorna el color
- */
+
+	/**
+	 * 
+	 * @param _color
+	 * @return retorna el color
+	 */
 	public String mostrarColor(tColores _color) {
 		String color = null;
 		switch (_color) {
@@ -169,167 +180,162 @@ public class Engine {
 		}
 		return color;
 	}
+
 	/**
-	 * Metodo que permite utiliza las ayudas disponibles. si no quedan, deberá mostrar un mensaje informando sobre ello.
-	 * @param recibe por parametro _index indice del color iesimo que desea comprobar.
+	 * Metodo que permite utiliza las ayudas disponibles. si no quedan, deberá
+	 * mostrar un mensaje informando sobre ello.
+	 * 
+	 * @param recibe por parametro _index indice del color iesimo que desea
+	 *               comprobar.
 	 * @return retorna true si quedan ayudas, false si no quedan ayudas.
 	 */
 	public boolean usarAyuda(int _index) {
-		if(this.ayuda>0) {
-			System.out.println("tienes "+ this.ayuda + " ayudas ,  siguiente color es: "+ this.secuenciaColores[_index]+ ", introducelo ");			
+		if (this.ayuda > 0) {
+			System.out.println("tienes " + this.ayuda + " ayudas ,  siguiente color es: "
+					+ this.secuenciaColores[_index] + ", introducelo ");
 			this.ayuda--;
 			return true;
-		}else {
+		} else {
 			System.out.println("no te quedan ayudas");
 			return false;
 		}
-		}
-			
+	}
+
 	/**
-	 * Este metodo lleva el control del juego con un menu para que el jugador elija que desea hacer 
+	 * Este metodo lleva el control del juego con un menu para que el jugador elija
+	 * que desea hacer
+	 * 
 	 */
-	public void start() {
+	public void start()  {
+
+		Record record = new Record();
+		try {
+			record.cargarRanking();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		System.out.println("Bienvenido a Simon Dice!!! ");
 		System.out.println(" ");
 		System.out.println("¿Cual es tu nombre? ");
-		Record record= new Record();
 
 		String nombre = entrada.nextLine();
 		Jugador jugador = new Jugador(nombre);
-		Jugador jugador1 = new Jugador("Mayra");
-		Jugador jugador2 = new Jugador("Victor");
-		Jugador jugador3 = new Jugador("Juan");
-		Jugador jugador4 = new Jugador("Pepe");
-		Jugador jugador5= new Jugador("Lola");
-		Jugador jugador6 =new Jugador ("lolo");
-		Jugador jugador7 =new Jugador ("Loli");
-		Jugador jugador8 =new Jugador ("Pedro");
-		Jugador jugador9 =new Jugador ("Marc");
-		//Jugador jugador10 =new Jugador ("Puri");
-		//Jugador jugador11 =new Jugador ("Puro");
 		
-		jugador1.setPuntuacion(250);
-		jugador2.setPuntuacion(250);		
-		jugador3.setPuntuacion(200);
-		jugador4.setPuntuacion(80);
-		jugador5.setPuntuacion(95);
-		jugador6.setPuntuacion(90);
-		jugador7.setPuntuacion(55);
-		jugador8.setPuntuacion(15);
-		jugador9.setPuntuacion(195);
-		//jugador10.setPuntuacion(195);
-		//jugador11.setPuntuacion(185);
+		jugador.setPuntuacion(puntos);		
+		record.addJugador(jugador);	
+		int opcion;
 		
-		
-		
-		
-		
-		record.addJugador(jugador1);
-		record.addJugador(jugador2);
-		record.addJugador(jugador3);
-		record.addJugador(jugador4);
-		record.addJugador(jugador5);
-		record.addJugador(jugador6);
-		record.addJugador(jugador7);
-		record.addJugador(jugador8);
-		record.addJugador(jugador9);
-		//record.addJugador(jugador10);
-		//record.addJugador(jugador11);
-		
-		System.out.println("Hola " + jugador.getNombre() + " pulsa ENTER para empezar ");
-		entrada.nextLine();
-		menu();
-
-		int opcion = entrada.nextInt();
 		do {
+			System.out.println("Hola " + jugador.getNombre());
+			menu();
+			
+			
+			 opcion = entrada.nextInt();
+			
 			switch (opcion) {
 			case 0:
+				record.ordenarRanking();
+				try {
+					record.escribirRanking();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				System.out.println("Abandonas el juego");
 				break;
 			case 1:
 				int resultado = play(tModo.FACIL);
 				jugador.setPuntuacion(resultado);
-				
+
 				break;
 			case 2:
 				int resultado1 = play(tModo.DIFICIL);
 				jugador.setPuntuacion(resultado1);
 				break;
 			case 3:
-				 record.ordenarRanking();
-				 record.showRanking();
-				 break;
+				record.ordenarRanking();
+				record.showRanking();
+				break;
 			case 4:
-				 record.ordenarRanking();
-				 record.showBestPlayer();
-				 break;
+				record.ordenarRanking();
+				record.showBestPlayer();
+				break;
 			}
-		}while (opcion!=0);
+		} while (opcion != 0);
 	}
+
 	/**
-	 * Metodo que llevara el control del juego. Sera el encargado de controlar la secuencia en la que se encuentra el juego
+	 * Metodo que llevara el control del juego. Sera el encargado de controlar la
+	 * secuencia en la que se encuentra el juego
 	 * 
-	 * @param tModo  modo facil o dificil segun el modo de juego que elija el jugador
+	 * @param tModo modo facil o dificil segun el modo de juego que elija el jugador
 	 * @return puntuacion
 	 */
 	public int play(tModo modo) {
-		int puntuacion=0;
-		if(modo == tModo.FACIL) {
+
+		if (modo == tModo.FACIL) 
 			generarSecuencia(4);
-		}else {
+		 else 
 			generarSecuencia(7);
-		}
 		
-		Jugador jugador = new Jugador(nombre);
 		int secuencia = 3;
 		boolean fallo = true;
 		int numSecuencia = 1;
 		
+		
+		while (secuencia<=this.MAX_COLORES_SEQ && fallo) {
+			System.out.println("secuencia nº: " + numSecuencia);
+			System.out.println("memorize la secuencia  de colores cuando este listo pulse enter ");
 
-			while (secuencia <=this.MAX_COLORES_SEQ && fallo) {
-				System.out.println("secuencia nº: "+ numSecuencia);
-				System.out.println("memorize la secuencia  de colores cuando este listo pulse enter ");
+			mostrarSecuencia(secuencia);
+			entrada.nextLine();
+			entrada1.nextLine();
 
-				mostrarSecuencia(secuencia);
-				entrada.nextLine();
-				entrada1.nextLine();
-
-				for (int j=0; j<20; j++) {
-					System.out.println();
-				}
-				
-				System.out.println("introduzca la secuencia de colores (x para ayuda)");
-
-				int indice = 0;
-				
-				while (indice <secuencia && fallo) {
-					char miChar = entrada1.next().charAt(0);
-						
-					if(miChar =='x') {
-						usarAyuda(indice);				
-					}	
-					else if(comprobarFallo(indice, charToColor(miChar))) {
-						System.out.println("correcto ya tienes : "+jugador.getPuntuacion() +" puntos" );
-						indice++;
-						System.out.println();								
-					} else {
-						System.out.println("Lo siento has perdido, vuelve a intentarlo");					
-					}
-				}	
-							 
-				if (fallo && secuencia < this.MAX_COLORES_SEQ) {
-					numSecuencia++;	
-					secuencia++;		
-				} 
-				 else if (fallo && secuencia ==this.MAX_COLORES_SEQ) {
-					System.out.println("Enhorabuena has ganado!!!!!! y sumado 40 puntos  "+" tu puntuacion final es "+ (jugador.getPuntuacion()+40)+" puntos");
-					entrada.nextLine();	
-			
-				}			
+			for (int j = 0; j < 20; j++) {
+				System.out.println();
 			}
-		//}while (fallo==false && secuencia ==this.MAX_COLORES_SEQ);
-	
-	return puntuacion;
 
+			System.out.println("introduzca la secuencia de colores (x para ayuda)");
+
+			int indice = 0;
+
+			while (indice < secuencia && fallo) {
+				char miChar = entrada.next().charAt(0);
+
+				if (miChar == 'x') {
+					usarAyuda(indice);
+					this.puntos-=8;
+				} else if (comprobarFallo(indice, charToColor(miChar))) {
+					System.out.println("correcto ya tienes : " + (this.puntos += 10) + " puntos");
+					indice++;
+					System.out.println();
+				} else {
+					System.out.println("Lo siento has fallado, tu puntuación es " +  this.puntos);
+					System.out.println();
+					
+					fallo = false;
+				}
+			}
+
+			if (fallo && secuencia < this.MAX_COLORES_SEQ) {
+				//System.out.println("siguiente secuencia");
+				numSecuencia++;
+				secuencia++;
+			} else if (fallo && secuencia == this.MAX_COLORES_SEQ) {
+				if(modo==tModo.FACIL) 
+					 this.puntos += 40;
+				  else
+					this.puntos+=80;
+				
+				System.out.println("Enhorabuena has ganado!!!!!!  tu puntuacion final es "
+						+ this.puntos + " puntos");
+				entrada.nextLine();
+				fallo = false;
+			}
+		}	
+	return this.puntos;
+		
+			
 	}
 }

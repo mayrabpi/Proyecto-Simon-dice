@@ -17,6 +17,7 @@ public class Jugador {
 	public Jugador (String nombre ) {
 		
 		this.nombre=nombre;
+		this.puntuacion = puntuacion;
 		
 		
 	}
@@ -41,8 +42,7 @@ public class Jugador {
 	 */	
 	public int getPuntuacion() {
 		
-		return this.puntuacion;
-		
+		return this.puntuacion;	
 	}
 	/**
 	 * 
