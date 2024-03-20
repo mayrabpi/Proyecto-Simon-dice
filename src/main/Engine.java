@@ -319,7 +319,6 @@ public class Engine {
 			}
 
 			if (fallo && secuencia < this.MAX_COLORES_SEQ) {
-				//System.out.println("siguiente secuencia");
 				numSecuencia++;
 				secuencia++;
 			} else if (fallo && secuencia == this.MAX_COLORES_SEQ) {

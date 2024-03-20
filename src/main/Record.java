@@ -12,7 +12,7 @@ import filesPackage.CustomWriteFile;
  * 
  */
 public class Record {
-	private final int MAX_JUGADORES = 10;
+	private final int MAX_JUGADORES =10;
 	private int contador;
 	private Jugador jugadores[];
 	private Scanner entrada;
