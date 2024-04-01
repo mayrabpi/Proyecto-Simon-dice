@@ -28,7 +28,6 @@ public class Engine {
 	private Scanner entrada1 = new Scanner(System.in);
 	private final int MAX_COLORES_SEQ = 6;
 	private tColores[] secuenciaColores = new tColores[MAX_COLORES_SEQ];
-	private String nombre;
 	private int ayuda;
 	private int puntos;
 
